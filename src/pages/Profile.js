@@ -19,7 +19,7 @@ function Profile() {
   const [activePage, setActivePage] = useState(1);
   const { user } = useUserContext();
   const { username } = useParams();
-  const [acitveTab, setActiveTab] = useState("author");
+  const [activeTab, setActiveTab] = useState("author");
 
   const articlePerPage = 10;
 
@@ -29,7 +29,7 @@ function Profile() {
       setLoading(true);
       const res = await fetch(
         articleURL +
-          `/?${acitveTab}=${username}&limit=${articlePerPage}&offset=${offset}`
+          `/?${activeTab}=${username}&limit=${articlePerPage}&offset=${offset}`
       );
       if (!res.ok) {
         throw new Error("Error while fetching the article");
@@ -76,7 +76,7 @@ function Profile() {
 
   useEffect(() => {
     fetchArticles();
-  }, [acitveTab, activePage, profile]);
+  }, [activeTab, activePage, profile]);
 
   const changeActiveTab = (tab) => {
     setActivePage(1);
@@ -129,7 +129,7 @@ function Profile() {
             <button
               onClick={() => changeActiveTab("author")}
               className={`p-2  rounded-lg ${
-                acitveTab === "author"
+                activeTab === "author"
                   ? "bg-indigo-400 text-white"
                   : "bg-gray-50 text-gray-700"
               }`}
@@ -139,7 +139,7 @@ function Profile() {
             <button
               onClick={() => changeActiveTab("favorited")}
               className={`p-2  rounded-lg ${
-                acitveTab === "favorited"
+                activeTab === "favorited"
                   ? "bg-indigo-400 text-white"
                   : "bg-gray-50 text-gray-700"
               }`}
